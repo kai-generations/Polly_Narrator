@@ -56,5 +56,5 @@ resource "aws_lambda_function" "lambda_polly_service" {
   role          = aws_iam_role.lambda_role.arn
   filename      = data.archive_file.javascript_polly_lambda.output_path
 
-  runtime = "node.js22.x"
+  runtime = "nodejs22.x"
 }
