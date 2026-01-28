@@ -31,7 +31,7 @@ export async function handler(event) {
         // Specify S3 parameters with ContentLength
         const key = `audio-${Date.now()}.mp3`;
         const s3Params = {
-            Bucket: "pollyaudiofilestorageproject3", // Replace with your S3 bucket name
+            Bucket: process.env.AUDIO_BUCKET_NAME, // set name to environment variable of bucket name in lambda function in main.tf
             Key: key,
             Body: audioBuffer,
             ContentType: "audio/mpeg",

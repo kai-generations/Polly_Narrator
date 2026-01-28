@@ -20,7 +20,6 @@ data "archive_file" "javascript_polly_lambda" {
 
 # This block will create an S3 bucket
 resource "aws_s3_bucket" "polly_audio_storage" {
-  region        = "us-east-1"
   force_destroy = true
 }
 
@@ -55,7 +54,13 @@ resource "aws_lambda_function" "lambda_polly_service" {
   function_name = "TTStranslatorfunction"
   role          = aws_iam_role.lambda_role.arn
   filename      = data.archive_file.javascript_polly_lambda.output_path
-  handler       = "index.handler" # required when zip is the package type
+  handler       = "textToSpeech.handler" # required when zip is the package type
 
   runtime = "nodejs22.x"
+
+  environment {
+    variables = {
+      AUDIO_BUCKET_NAME = aws_s3_bucket.polly_audio_storage.id
+    }
+  }
 }
