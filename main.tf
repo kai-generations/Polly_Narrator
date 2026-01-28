@@ -33,6 +33,6 @@ resource "aws_iam_role" "lamda_role" {
 resource "aws_iam_role_policy_attachment" "lambda_permissions" {
   for_each = toset(local.managed_policies)
 
-  role       = "aws_iam_role.lamda_role"
+  role       = aws_iam_role.lamda_role.name
   policy_arn = "arn:aws:iam::aws:policy/${each.value}"
 }
