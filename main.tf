@@ -2,12 +2,12 @@ provider "aws" {
   region = "us-east-1"
 }
 
-# The locals block is used to list which AWS policies will be used
+# The locals block is used to list which AWS policies will be used; added service-role to the BasicExecutionRole since it is a service role is part of the arn after policy/
 locals {
   managed_policies = [
     "AmazonPollyFullAccess",
     "AmazonS3FullAccess",
-    "AWSLambdaBasicExecutionRole"
+    "service-role/AWSLambdaBasicExecutionRole"
   ]
 }
 
