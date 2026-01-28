@@ -13,7 +13,7 @@ locals {
 
 # This resource creates the lambda role 
 resource "aws_iam_role" "lamda_role" {
-  name = "PollyTranslationRole"
+  name                  = "PollyTranslationRole"
   force_detach_policies = true
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -32,7 +32,7 @@ resource "aws_iam_role" "lamda_role" {
 # This block attaches the managed policies to our lambda role
 resource "aws_iam_role_policy_attachment" "lambda_permissions" {
   for_each = toset(local.managed_policies)
-  
-  role = aws_iam_role.lamda_role
+
+  role       = aws_iam_role.lamda_role
   policy_arn = "arn:aws:iam::aws:policy/${each.value}"
 }
