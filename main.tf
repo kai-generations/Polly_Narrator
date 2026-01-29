@@ -14,7 +14,7 @@ locals {
 # This block will package the Lambda function code; will require archive provider
 data "archive_file" "javascript_polly_lambda" {
   type        = "zip"
-  source_file = "${path.module}/textToSpeech.js" # ${path.module} is a dynamic pointer that always identifies the filesystem path of the specific folder where the .tf files be written are
+  source_file = "${path.module}/textToSpeech.mjs" # ${path.module} is a dynamic pointer that always identifies the filesystem path of the specific folder where the .tf files be written are
   output_path = "${path.module}/textToSpeech.zip"
 }
 
